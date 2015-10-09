@@ -4,13 +4,12 @@ var babelify = require('babelify');
 var source = require('vinyl-source-stream');
 
 var paths = {
-  javascripts: ['assets/javascripts/**/*.jsx', 'assets/javascripts/**/*.js'],
-  stylesheets: ['assets/stylesheets/**/*']
+  javascripts: ['lib/**/*.jsx', 'lib/**/*.js'],
 };
 
 gulp.task('build', function () {
   browserify({
-    entries: 'assets/javascripts/react_timeline',
+    entries: 'lib/react_timeline_slider',
     extensions: ['.jsx', '.js'],
     debug: true
   })

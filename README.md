@@ -5,9 +5,9 @@ A Timeline Slider for React.
 
 ### Usage
 
-`js
+```es6
 ReactDOM.render(<ReactTimeline range={[2010, 2011, 2012]} width="600", height: "40" />, el)
-`
+```
 
 ## TODO
 

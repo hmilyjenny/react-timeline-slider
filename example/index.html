@@ -8,9 +8,18 @@
     <div id="container"></div>
     <script>
       function onValueChange(v) {
-        value.innerHTML = v[0];
+        value.innerHTML = v;
       }
-      ReactTimelineSlider.renderOn(container, { range: [2010, 2011, 2012, 2013, 2014, 2015], width: "600", height: "40", onValueChange: onValueChange });
+      ReactTimelineSlider.renderOn(container, {
+        range: [2010, 2011, 2012, 2013, 2014, 2015],
+        onValueChange: onValueChange,
+        styles: {
+          handlerStyle: {
+            r: "6",
+            fill: "#6699ff",
+          }
+        }
+      });
     </script>
   </body>
 </html>

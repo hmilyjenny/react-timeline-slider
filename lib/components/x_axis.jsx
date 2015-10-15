@@ -1,6 +1,7 @@
 import React from 'react';
 import { G, Circle } from './react_svg';
-import { TickCollectionUtils, TickCollection } from './tick_collection';
+import { TickCollection } from '../tick';
+import TickCollectionView from './tick_collection';
 import Handler from './handler';
 
 export default class XAxis extends React.Component {
@@ -9,23 +10,23 @@ export default class XAxis extends React.Component {
   }
 
   ticks() {
-    return TickCollectionUtils.collectionFromRange(this.props.range, this.width());
+    return TickCollection.fromRange(this.props.range, this.width());
   }
 
   limits() {
     let ticks = this.ticks();
     return {
-      min: TickCollectionUtils.min(ticks),
-      max: TickCollectionUtils.max(ticks)
+      min: ticks.min(),
+      max: ticks.max()
     };
   }
 
   activeTick() {
-    return TickCollectionUtils.findByValue(this.ticks(), this.props.value);
+    return this.ticks().findByValue(this.props.value);
   }
 
   handlerDragged(x) {
-    this.props.onValueChange(TickCollectionUtils.findCloser(this.ticks(), x).value);
+    this.props.onValueChange(this.ticks().findCloser(x).value);
   }
 
   render() {
@@ -33,7 +34,7 @@ export default class XAxis extends React.Component {
 
     return (
       <G className="xaxis" transform={ `translate(${margin}, ${margin}) ` }>
-        <TickCollection ticks={this.ticks()} styles={this.props.styles}/>
+        <TickCollectionView ticks={this.ticks()} styles={this.props.styles}/>
         <Handler ticks={this.ticks()}
           limits={this.limits()}
           activeTick={this.activeTick()}

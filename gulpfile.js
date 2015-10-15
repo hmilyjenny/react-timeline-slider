@@ -9,7 +9,7 @@ var paths = {
 
 gulp.task('build', function () {
   browserify({
-    entries: 'lib/react_timeline_slider',
+    entries: 'lib/index',
     extensions: ['.jsx', '.js'],
     debug: true
   })

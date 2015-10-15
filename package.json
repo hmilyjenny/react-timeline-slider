@@ -2,7 +2,7 @@
   "name": "react-timeline-slider",
   "version": "0.0.1",
   "description": "A Timeline Slider for React",
-  "main": "lib/react_timeline_slider.jsx",
+  "main": "lib/index.js",
   "dependencies": {
     "d3": "^3.5.6",
     "react": "^0.14.0",

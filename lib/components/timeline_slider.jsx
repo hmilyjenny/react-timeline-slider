@@ -1,13 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { SVG } from './react_svg';
-import AutoWidth from './auto_width';
 import Background from './background';
-import DefaultStyles from './styles';
+import DefaultStyles from './../styles';
 import XAxis from './x_axis';
 import _ from 'underscore';
 
-class ReactTimelineSlider extends React.Component {
+export default class TimelineSlider extends React.Component {
   constructor(props) {
     super(props);
 
@@ -46,20 +44,8 @@ class ReactTimelineSlider extends React.Component {
   }
 }
 
-ReactTimelineSlider.defaultProps = {
+TimelineSlider.defaultProps = {
   styles: {}
 }
 
-class Wrapper extends React.Component {
-  render() {
-    let Component = AutoWidth(ReactTimelineSlider);
-    return <Component {...this.props} />;
-  }
-  static renderOn(el, options={}) {
-    let Component = AutoWidth(ReactTimelineSlider);
-    ReactDOM.render(<Component {...options} />, el)
-  }
-};
 
-export default Wrapper;
-global.ReactTimelineSlider = Wrapper;

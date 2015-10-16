@@ -28,7 +28,7 @@ gulp build
 run a HTTP server
 
 ```bash
-http-serve 8080
+http-server
 ```
 
 the examples are `example/index.html` and `example/multiple.html`

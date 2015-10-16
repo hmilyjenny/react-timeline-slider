@@ -83,4 +83,10 @@ class Circle extends React.Component {
   }
 }
 
-export { SVG, G, Rect, Circle, Line, Polyline, Path };
+class Text extends React.Component {
+  render() {
+    return <SVGComponent {...this.props} component="text">{this.props.children}</SVGComponent>
+  }
+}
+
+export { SVG, G, Rect, Circle, Line, Polyline, Path, Text };

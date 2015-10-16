@@ -16,13 +16,33 @@ export default class TimelineSlider extends React.Component {
 
   onValueChange(v) {
     this.setState({ value: v });
-    this.props.onValueChange(v);
+    this.props.onValueChange(this.value());
+  }
+
+  rawValue() {
+    if(this.state.value) return this.state.value;
+    if(this.props.defaultValue) return this.props.defaultValue;
+    return this.computeDefaultValue();
+  }
+
+  computeDefaultValue() {
+    if(this.props.multi) {
+      return [
+        Math.min.apply(Math, this.props.range),
+        Math.max.apply(Math, this.props.range)
+      ];
+    } else {
+      return [Math.max.apply(Math, this.props.range)];
+    }
   }
 
   value() {
-    if(this.state.value) return this.state.value;
-    if(this.props.defaultValue) return this.props.defaultValue;
-    return Math.max.apply(Math, this.props.range);
+    let rawValue = this.rawValue();
+    if(this.props.multi) {
+      return rawValue;
+    } else {
+      return rawValue[0];
+    }
   }
 
   styles() {
@@ -37,7 +57,8 @@ export default class TimelineSlider extends React.Component {
           styles={this.styles()}
           width={this.props.width}
           range={this.props.range}
-          value={this.value()}
+          value={this.rawValue()}
+          multi={this.props.multi}
           onValueChange={this.onValueChange.bind(this)}/>
       </SVG>
     );
@@ -45,7 +66,8 @@ export default class TimelineSlider extends React.Component {
 }
 
 TimelineSlider.defaultProps = {
-  styles: {}
+  styles: {},
+  multi: false
 }
 
 

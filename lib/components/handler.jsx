@@ -2,7 +2,10 @@ import React from 'react';
 import { TickCollectionUtils } from './tick_collection';
 import { Circle } from './react_svg';
 
-class Handler extends React.Component {
+var HANDLER_ONE = Symbol("HANDLER_ONE");
+var HANDLER_TWO = Symbol("HANDLER_TWO");
+
+export default class Handler extends React.Component {
   constructor(props) {
     super(props);
 
@@ -22,6 +25,7 @@ class Handler extends React.Component {
     if(e.x < limits.min) x = this.minTicksX();
     if(e.x > limits.max) x = this.maxTicksX();
     this.setState({ x: x });
+    this.props.onDrag(x);
   }
 
   get x() {
@@ -44,4 +48,4 @@ class Handler extends React.Component {
   }
 }
 
-export default Handler;
+export { HANDLER_ONE, HANDLER_TWO };

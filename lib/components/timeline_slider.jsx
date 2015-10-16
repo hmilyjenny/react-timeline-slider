@@ -69,5 +69,3 @@ TimelineSlider.defaultProps = {
   styles: {},
   multi: false
 }
-
-

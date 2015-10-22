@@ -1,6 +1,5 @@
 var gulp = require('gulp');
 var browserify = require('browserify');
-var babelify = require('babelify');
 var source = require('vinyl-source-stream');
 
 var paths = {
@@ -10,10 +9,8 @@ var paths = {
 gulp.task('build', function () {
   browserify({
     entries: 'lib/index',
-    extensions: ['.jsx', '.js'],
-    debug: true
+    extensions: ['.jsx', '.js']
   })
-  .transform(babelify)
   .bundle()
   .pipe(source('react-timeline-slider.js'))
   .pipe(gulp.dest('dist'));

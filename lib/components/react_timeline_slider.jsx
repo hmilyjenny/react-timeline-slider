@@ -8,8 +8,4 @@ export default class ReactTimelineSlider extends React.Component {
     let Component = AutoWidth(TimelineSlider);
     return <Component {...this.props} />;
   }
-
-  static renderOn(el, options={}) {
-    ReactDOM.render(<ReactTimelineSlider {...options} />, el)
-  }
 };

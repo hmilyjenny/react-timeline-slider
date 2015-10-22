@@ -34,3 +34,4 @@ var AutoWidth = (ComposedComponent) => class extends React.Component {
 };
 
 export default AutoWidth;
+global.AutoWidth = AutoWidth;

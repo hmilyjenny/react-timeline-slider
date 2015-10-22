@@ -50,13 +50,43 @@ export default class TimelineSlider extends React.Component {
     return _.extend({}, DefaultStyles, this.props.styles)
   }
 
+  textSize() {
+    let letterSize = 5;
+    return this.props.range.map((i) => {
+      return i.toString().length;
+    }).reduce((a,b) => a+b) * letterSize;
+  }
+
+  contextSize() {
+    if(this.textSize() > (this.props.width / 2)) {
+      return "compact";
+    } else {
+      return "large";
+    }
+  }
+
+  width() {
+    let max = Math.max(this.props.width, this.textSize()/2);
+    if(max) return max;
+    return 0;
+  }
+
+  height() {
+    if(this.contextSize() == "compact") {
+      return 80;
+    } else {
+      return 40;
+    }
+  }
+
   render() {
     return (
-      <SVG width={this.props.width} height="40">
+      <SVG width={this.width()} height={this.height()}>
         <Background style={this.styles().backgroundStyle} />
         <XAxis style={this.styles().xAxisStyle}
+          contextSize={this.contextSize()}
           styles={this.styles()}
-          width={this.props.width}
+          width={this.width()}
           range={this.props.range}
           value={this.rawValue()}
           multi={this.props.multi}

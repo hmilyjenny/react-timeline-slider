@@ -28,13 +28,14 @@ export default class Handler extends React.Component {
     let limits = this.props.limits;
     if(e.x < limits.min.x) x = limits.min.x;
     if(e.x > limits.max.x) x = limits.max.x;
+
     this.setState({ x: x }, () => {
       this.props.onDrag(x);
     });
   }
 
   get x() {
-    if(this.state.x) {
+    if(this.state.x !== null) {
       return this.state.x;
     } else {
       return this.props.activeTick.x;

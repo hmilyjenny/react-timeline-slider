@@ -76,8 +76,11 @@ export default class XAxis extends React.Component {
 
     return (
       <G className="xaxis" transform={ `translate(${margin}, ${margin}) ` }>
-        <TickCollectionView ticks={this.ticks()} styles={this.props.styles}/>
-                {(()=>{
+        <TickCollectionView
+          contextSize={this.props.contextSize}
+          ticks={this.ticks()}
+          styles={this.props.styles} />
+        {(()=>{
           if(this.props.multi) {
             return (
               <G>

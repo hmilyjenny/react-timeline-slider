@@ -1,6 +1,6 @@
 {
   "name": "react-timeline-slider",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/ecostage/react-timeline-slider",
   "authors": [
     "Marcelo Piva <m.pivaa@gmail.com>"
@@ -20,6 +20,7 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "lib"
   ]
 }

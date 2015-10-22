@@ -5,6 +5,7 @@ import TickCollectionView from './tick_collection';
 import Handler from './handler';
 import { HANDLER_ONE, HANDLER_TWO } from './handler';
 import LineBetweenHandlers from './line_between_handlers';
+import _ from 'underscore';
 
 export default class XAxis extends React.Component {
   constructor(props) {
@@ -64,7 +65,7 @@ export default class XAxis extends React.Component {
   }
 
   getHandlerPosition(handler) {
-    if(this.state.handlersPosition[handler] !== null) {
+    if(_.isNumber(this.state.handlersPosition[handler])) {
       return this.state.handlersPosition[handler];
     } else {
       return this.activeTick(handler).x;

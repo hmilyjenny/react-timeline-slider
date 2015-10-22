@@ -15,7 +15,7 @@ gulp.task('build', function () {
   })
   .transform(babelify)
   .bundle()
-  .pipe(source('bundle.js'))
+  .pipe(source('react-timeline-slider.js'))
   .pipe(gulp.dest('dist'));
 });
 

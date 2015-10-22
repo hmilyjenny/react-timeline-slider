@@ -50,8 +50,9 @@ export default class XAxis extends React.Component {
     values[handler] = this.ticks().findCloser(x).value;
     this.setState({
       handlersPosition: []
+    }, () => {
+      this.props.onValueChange(values.toArray());
     })
-    this.props.onValueChange(values.toArray());
   }
 
   setHandlerPosition(handler, x) {

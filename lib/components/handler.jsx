@@ -15,9 +15,11 @@ export default class Handler extends React.Component {
   }
 
   handlerDragged() {
-    if(this.state.x) {
-      this.props.dragged(this.state.x);
-      this.setState({ x: null });
+    let x = this.state.x;
+    if(x) {
+      this.setState({ x: null }, () => {
+        this.props.dragged(x);
+      });
     }
   }
 
@@ -26,8 +28,9 @@ export default class Handler extends React.Component {
     let limits = this.props.limits;
     if(e.x < limits.min.x) x = limits.min.x;
     if(e.x > limits.max.x) x = limits.max.x;
-    this.setState({ x: x });
-    this.props.onDrag(x);
+    this.setState({ x: x }, () => {
+      this.props.onDrag(x);
+    });
   }
 
   get x() {

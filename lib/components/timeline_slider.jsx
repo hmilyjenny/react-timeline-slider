@@ -15,8 +15,9 @@ export default class TimelineSlider extends React.Component {
   }
 
   onValueChange(v) {
-    this.setState({ value: v });
-    this.props.onValueChange(this.value());
+    this.setState({ value: v }, () => {
+      this.props.onValueChange(this.value());
+    });
   }
 
   rawValue() {

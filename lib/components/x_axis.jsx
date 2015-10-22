@@ -64,7 +64,7 @@ export default class XAxis extends React.Component {
   }
 
   getHandlerPosition(handler) {
-    if(this.state.handlersPosition[handler]) {
+    if(this.state.handlersPosition[handler] !== null) {
       return this.state.handlersPosition[handler];
     } else {
       return this.activeTick(handler).x;

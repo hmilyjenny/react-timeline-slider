@@ -79,6 +79,12 @@ export default class TimelineSlider extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(!_.isEqual(nextProps.range, this.props.range)) {
+      this.setState({ value: null });
+    }
+  }
+
   render() {
     return (
       <SVG width={this.width()} height={this.height()}>

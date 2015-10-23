@@ -2,8 +2,8 @@ import React from 'react';
 import { TickCollectionUtils } from './tick_collection';
 import { Circle } from './react_svg';
 
-var HANDLER_ONE = Symbol("HANDLER_ONE");
-var HANDLER_TWO = Symbol("HANDLER_TWO");
+var HANDLER_ONE = String("HANDLER_ONE");
+var HANDLER_TWO = String("HANDLER_TWO");
 
 export default class Handler extends React.Component {
   constructor(props) {

@@ -17,7 +17,7 @@ export default class XAxis extends React.Component {
   }
 
   width() {
-    return this.props.width - this.props.margin*2;
+    return this.props.width - this.props.margin*4;
   }
 
   ticks() {
@@ -65,10 +65,11 @@ export default class XAxis extends React.Component {
   }
 
   getHandlerPosition(handler) {
+    let activeTick = this.activeTick(handler);
     if(_.isNumber(this.state.handlersPosition[handler])) {
       return this.state.handlersPosition[handler];
-    } else {
-      return this.activeTick(handler).x;
+    } else if(activeTick) {
+      return activeTick.x;
     }
   }
 
@@ -76,7 +77,7 @@ export default class XAxis extends React.Component {
     let margin = this.props.margin;
 
     return (
-      <G className="xaxis" transform={ `translate(${margin}, ${margin}) ` }>
+      <G className="xaxis" transform={ `translate(${margin*2}, ${margin}) ` }>
         <TickCollectionView
           contextSize={this.props.contextSize}
           ticks={this.ticks()}

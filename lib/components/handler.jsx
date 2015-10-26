@@ -16,7 +16,7 @@ export default class Handler extends React.Component {
 
   handlerDragged() {
     let x = this.state.x;
-    if(x) {
+    if(x != null) {
       this.setState({ x: null }, () => {
         this.props.dragged(x);
       });

@@ -3,6 +3,7 @@ import { SVG } from './react_svg';
 import Background from './background';
 import DefaultStyles from './../styles';
 import XAxis from './x_axis';
+import PlayStop from './play_stop';
 import _ from 'underscore';
 
 export default class TimelineSlider extends React.Component {
@@ -89,6 +90,7 @@ export default class TimelineSlider extends React.Component {
     return (
       <SVG width={this.width()} height={this.height()}>
         <Background style={this.styles().backgroundStyle} />
+        <PlayStop style={this.styles().playStopStyle} />
         <XAxis style={this.styles().xAxisStyle}
           contextSize={this.contextSize()}
           styles={this.styles()}
@@ -96,6 +98,7 @@ export default class TimelineSlider extends React.Component {
           range={this.props.range}
           value={this.rawValue()}
           multi={this.props.multi}
+          playStop={this.props.playStop}
           onValueChange={this.onValueChange.bind(this)}/>
       </SVG>
     );
@@ -104,5 +107,6 @@ export default class TimelineSlider extends React.Component {
 
 TimelineSlider.defaultProps = {
   styles: {},
-  multi: false
+  multi: false,
+  playStop: false
 }

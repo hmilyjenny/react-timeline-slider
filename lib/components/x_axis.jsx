@@ -6,6 +6,7 @@ import Handler from './handler';
 import { HANDLER_ONE, HANDLER_TWO } from './handler';
 import LineBetweenHandlers from './line_between_handlers';
 import _ from 'underscore';
+import PubSub from 'pubsub-js';
 
 export default class XAxis extends React.Component {
   constructor(props) {
@@ -16,8 +17,25 @@ export default class XAxis extends React.Component {
     };
   }
 
+  componentDidMount() {
+    if(this.props.playStop) {
+      PubSub.subscribe('PlayStop:play', () => {
+        console.log('Play!');
+      });
+    }
+  }
+
+  componentWillUnmount() {
+    PubSub.unsubscribe('PlayStop:play');
+  }
+
+  playStopSpace() {
+    if(this.props.playStop) return 50;
+    return 0;
+  }
+
   width() {
-    return this.props.width - this.props.margin*4;
+    return this.props.width - this.props.margin*4 - this.playStopSpace();
   }
 
   ticks() {
@@ -77,7 +95,7 @@ export default class XAxis extends React.Component {
     let margin = this.props.margin;
 
     return (
-      <G className="xaxis" transform={ `translate(${margin*2}, ${margin}) ` }>
+      <G className="xaxis" transform={ `translate(${margin*2+this.playStopSpace()}, ${margin}) ` }>
         <TickCollectionView
           contextSize={this.props.contextSize}
           ticks={this.ticks()}

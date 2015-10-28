@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+    <script src="/dist/react-timeline-slider.js"></script>
+  </head>
+  <body onload="load()">
+    <div id="value">2015</div>
+    <div id="container"></div>
+    <script>
+      load = function() {
+        var c = React.createClass({
+          onValueChange: function(v) {
+            console.log(v);
+            this.setState({ v: v });
+          },
+          render: function() {
+            var element = React.createElement(ReactTimelineSlider, {
+              range: [2010, 2011, 2012, 2013, 2014, 2015],
+              onValueChange: this.onValueChange,
+              playStop: true,
+              styles: {
+                handlerStyle: {
+                  r: "6",
+                  fill: "#6699ff",
+                }
+              }
+            })
+
+            return element;
+          }
+        })
+        ReactDOM.render(React.createElement(c), container);
+      }
+    </script>
+  </body>
+</html>

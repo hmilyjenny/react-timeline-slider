@@ -1,7 +1,6 @@
 import React from 'react';
 import { SVG } from './react_svg';
 import Background from './background';
-import DefaultStyles from './../styles';
 import XAxis from './x_axis';
 import _ from 'underscore';
 
@@ -46,10 +45,6 @@ export default class TimelineSlider extends React.Component {
     }
   }
 
-  styles() {
-    return _.extend({}, DefaultStyles, this.props.styles)
-  }
-
   textSize() {
     let letterSize = 5;
     return this.props.range.map((i) => {
@@ -75,7 +70,7 @@ export default class TimelineSlider extends React.Component {
     if(this.contextSize() == "compact") {
       return 80;
     } else {
-      return 40;
+      return 45;
     }
   }
 
@@ -87,11 +82,10 @@ export default class TimelineSlider extends React.Component {
 
   render() {
     return (
-      <SVG width={this.width()} height={this.height()}>
-        <Background style={this.styles().backgroundStyle} />
-        <XAxis style={this.styles().xAxisStyle}
-          contextSize={this.contextSize()}
-          styles={this.styles()}
+      <SVG className="react-timeline-slider"
+        width={this.width()} height={this.height()}>
+        <Background />
+        <XAxis contextSize={this.contextSize()}
           width={this.width()}
           range={this.props.range}
           value={this.rawValue()}

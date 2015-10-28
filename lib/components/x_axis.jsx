@@ -73,6 +73,23 @@ export default class XAxis extends React.Component {
     }
   }
 
+  multiHandlerSupport() {
+    if(this.props.multi) {
+      return (
+        <G>
+          <LineBetweenHandlers
+            x1={this.getHandlerPosition(HANDLER_ONE)}
+            x2={this.getHandlerPosition(HANDLER_TWO)} />
+          <Handler ticks={this.ticks()}
+            limits={this.limits()}
+            activeTick={this.activeTick(HANDLER_TWO)}
+            onDrag={this.setHandlerPosition.bind(this, HANDLER_TWO)}
+            dragged={this.handlerDragged.bind(this, HANDLER_TWO)}/>
+        </G>
+      );
+    }
+  }
+
   render() {
     let margin = this.props.margin;
 
@@ -80,39 +97,18 @@ export default class XAxis extends React.Component {
       <G className="xaxis" transform={ `translate(${margin*2}, ${margin}) ` }>
         <TickCollectionView
           contextSize={this.props.contextSize}
-          ticks={this.ticks()}
-          styles={this.props.styles} />
-        {(()=>{
-          if(this.props.multi) {
-            return (
-              <G>
-                <LineBetweenHandlers
-                  style={this.props.styles.lineBetweenHandlers}
-                  x1={this.getHandlerPosition(HANDLER_ONE)}
-                  x2={this.getHandlerPosition(HANDLER_TWO)} />
-                <Handler ticks={this.ticks()}
-                  limits={this.limits()}
-
-                  activeTick={this.activeTick(HANDLER_TWO)}
-                  onDrag={this.setHandlerPosition.bind(this, HANDLER_TWO)}
-                  dragged={this.handlerDragged.bind(this, HANDLER_TWO)}
-                  style={this.props.styles.handlerStyle} />
-              </G>
-            );
-          }
-        })()}
-
+          ticks={this.ticks()}/>
+        {this.multiHandlerSupport()}
         <Handler ticks={this.ticks()}
           limits={this.limits()}
           activeTick={this.activeTick(HANDLER_ONE)}
           onDrag={this.setHandlerPosition.bind(this, HANDLER_ONE)}
-          dragged={this.handlerDragged.bind(this, HANDLER_ONE)}
-          style={this.props.styles.handlerStyle} />
+          dragged={this.handlerDragged.bind(this, HANDLER_ONE)}/>
       </G>
     );
   }
 };
 
 XAxis.defaultProps = {
-  margin: 15
+  margin: 18
 };

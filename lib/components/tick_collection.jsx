@@ -6,12 +6,11 @@ export default class TickCollection extends React.Component {
   render() {
     let ticks = this.props.ticks.map((t, i) => {
       return <Tick tick={t} key={i}
-        styles={this.props.styles}
         contextSize={this.props.contextSize} />;
     });
 
     return (
-      <G className="ticks">
+      <G className="react-timeline-slider__ticks">
         {ticks}
       </G>
     );

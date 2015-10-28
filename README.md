@@ -35,6 +35,47 @@ http-server
 
 the examples are `example/index.html` and `example/multiple.html`
 
+## Styling
+
+```scss
+$background-color: 'gray';
+$handler-color: 'blue';
+$connector-color: 'green';
+
+.react-timeline-slider {
+  &__background {
+    fill: $background-color;
+  }
+
+  &__tick-point {
+    r: 2;
+  }
+
+  &__tick-text {
+    font-size: 10px;
+  }
+
+  &__handler {
+    r: 7;
+    fill: $handler-color;
+    transition: r 0.4s;
+
+    &:hover {
+      fill: darken($handler-color, 12%);
+    }
+
+    &:active {
+      r: 9;
+    }
+  }
+
+  &__line-between-handlers {
+    stroke: $connector-color;
+    stroke-width: 4px;
+  }
+}
+```
+
 ## TODO
 
 - [x] Add multiple handlers option;

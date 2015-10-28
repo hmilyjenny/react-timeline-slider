@@ -11,7 +11,8 @@ export default class TimelineSlider extends React.Component {
     super(props);
 
     this.state = {
-      value: null
+      value: null,
+      isPlaying: false
     };
   }
 
@@ -80,6 +81,10 @@ export default class TimelineSlider extends React.Component {
     }
   }
 
+  togglePlay() {
+    this.setState({ isPlaying: !this.state.isPlaying });
+  }
+
   componentWillReceiveProps(nextProps) {
     if(!_.isEqual(nextProps.range, this.props.range)) {
       this.setState({ value: null });
@@ -90,7 +95,16 @@ export default class TimelineSlider extends React.Component {
     return (
       <SVG width={this.width()} height={this.height()}>
         <Background style={this.styles().backgroundStyle} />
-        <PlayStop style={this.styles().playStopStyle} />
+        {(()=>{
+          if(this.props.playStop) {
+            return (
+              <PlayStop
+                style={this.styles().playStopStyle}
+                isPlaying={this.state.isPlaying}
+                onPlay={this.togglePlay.bind(this)} />
+            );
+          }
+        })()}
         <XAxis style={this.styles().xAxisStyle}
           contextSize={this.contextSize()}
           styles={this.styles()}
@@ -99,6 +113,7 @@ export default class TimelineSlider extends React.Component {
           value={this.rawValue()}
           multi={this.props.multi}
           playStop={this.props.playStop}
+          handleStop={this.togglePlay.bind(this)}
           onValueChange={this.onValueChange.bind(this)}/>
       </SVG>
     );

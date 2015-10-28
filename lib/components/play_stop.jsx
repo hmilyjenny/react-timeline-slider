@@ -4,7 +4,12 @@ import PubSub from 'pubsub-js';
 
 export default class PlayStop extends React.Component {
   handleClick() {
-    PubSub.publish('PlayStop:play');
+    if(this.props.isPlaying) {
+      PubSub.publish('PlayStop:pause');  
+    } else {
+      PubSub.publish('PlayStop:play');
+    }
+    this.props.onPlay();
   }
 
   render() {

@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'underscore';
 
 class Tick {
   constructor(value, x) {
@@ -31,6 +32,12 @@ class TickCollection {
         distance: Math.abs(x - t.x)
       };
     }).sort((a, b) => a.distance - b.distance)[0].tick;
+  }
+
+  findNext(v) {
+    return _.filter(this.ticks, (tick) => {
+      return tick.value > v;
+    })[0];
   }
 
   min() {

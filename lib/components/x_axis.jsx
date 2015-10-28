@@ -20,13 +20,35 @@ export default class XAxis extends React.Component {
   componentDidMount() {
     if(this.props.playStop) {
       PubSub.subscribe('PlayStop:play', () => {
-        console.log('Play!');
+        this.move();
+      });
+      PubSub.subscribe('PlayStop:pause', () => {
+        clearInterval(this.interval);
       });
     }
   }
 
   componentWillUnmount() {
     PubSub.unsubscribe('PlayStop:play');
+    PubSub.unsubscribe('PlayStop:pause');
+    clearInterval(this.interval);
+  }
+
+  move() {
+    let activeTickValue = this.activeTick(HANDLER_ONE).value;
+    let tickNextToActive = this.ticks().findNext(activeTickValue);
+    let maxTickValue = this.limits().max.value;
+
+    if(activeTickValue == maxTickValue) {
+      this.moveHandler(HANDLER_ONE, this.limits().min);
+      this.interval = setInterval(this.move.bind(this), 1000);
+    } else if(tickNextToActive.value == maxTickValue) {
+      this.moveHandler(HANDLER_ONE, tickNextToActive);
+      clearInterval(this.interval);
+      this.props.handleStop();
+    } else {
+      this.moveHandler(HANDLER_ONE, tickNextToActive);
+    }
   }
 
   playStopSpace() {
@@ -64,14 +86,28 @@ export default class XAxis extends React.Component {
     return this.ticks().findByValue(this.values()[handler]);
   }
 
+  moveHandler(handler, tick) {
+    let positions = this.state.handlersPosition;
+    let values = this.values();
+    positions[handler] = tick.x;
+    values[handler] = tick.value;
+
+    this.setState({
+      handlersPosition: positions
+    }, () => {
+      this.props.onValueChange(values.toArray());
+    })
+  }
+
   handlerDragged(handler, x) {
+    console.log('handler', handler, 'x', x);
     let values = this.values();
     values[handler] = this.ticks().findCloser(x).value;
     this.setState({
       handlersPosition: []
     }, () => {
       this.props.onValueChange(values.toArray());
-    })
+    });
   }
 
   setHandlerPosition(handler, x) {
@@ -110,7 +146,6 @@ export default class XAxis extends React.Component {
                   x2={this.getHandlerPosition(HANDLER_TWO)} />
                 <Handler ticks={this.ticks()}
                   limits={this.limits()}
-
                   activeTick={this.activeTick(HANDLER_TWO)}
                   onDrag={this.setHandlerPosition.bind(this, HANDLER_TWO)}
                   dragged={this.handlerDragged.bind(this, HANDLER_TWO)}

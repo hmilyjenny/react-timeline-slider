@@ -1,15 +1,9 @@
 import React from "react";
 import { Rect } from './react_svg';
-import PubSub from 'pubsub-js';
 
 export default class PlayStop extends React.Component {
   handleClick() {
-    if(this.props.isPlaying) {
-      PubSub.publish('PlayStop:pause');  
-    } else {
-      PubSub.publish('PlayStop:play');
-    }
-    this.props.onPlay();
+    this.props.onToggle();
   }
 
   render() {

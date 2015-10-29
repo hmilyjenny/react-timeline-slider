@@ -6,7 +6,6 @@ import Handler from './handler';
 import { HANDLER_ONE, HANDLER_TWO } from './handler';
 import LineBetweenHandlers from './line_between_handlers';
 import _ from 'underscore';
-import PubSub from 'pubsub-js';
 
 export default class XAxis extends React.Component {
   constructor(props) {
@@ -17,38 +16,19 @@ export default class XAxis extends React.Component {
     };
   }
 
-  componentDidMount() {
-    if(this.props.playStop) {
-      PubSub.subscribe('PlayStop:play', () => {
+  componentWillReceiveProps(nextProps) {
+    if(this.props.isPlaying != nextProps.isPlaying) {
+      if(nextProps.isPlaying) {
         this.move();
-      });
-      PubSub.subscribe('PlayStop:pause', () => {
+        this.interval = setInterval(this.move.bind(this), 1000);
+      } else {
         clearInterval(this.interval);
-      });
+      }
     }
   }
 
   componentWillUnmount() {
-    PubSub.unsubscribe('PlayStop:play');
-    PubSub.unsubscribe('PlayStop:pause');
     clearInterval(this.interval);
-  }
-
-  move() {
-    let activeTickValue = this.activeTick(HANDLER_ONE).value;
-    let tickNextToActive = this.ticks().findNext(activeTickValue);
-    let maxTickValue = this.limits().max.value;
-
-    if(activeTickValue == maxTickValue) {
-      this.moveHandler(HANDLER_ONE, this.limits().min);
-      this.interval = setInterval(this.move.bind(this), 1000);
-    } else if(tickNextToActive.value == maxTickValue) {
-      this.moveHandler(HANDLER_ONE, tickNextToActive);
-      clearInterval(this.interval);
-      this.props.handleStop();
-    } else {
-      this.moveHandler(HANDLER_ONE, tickNextToActive);
-    }
   }
 
   playStopSpace() {
@@ -86,6 +66,10 @@ export default class XAxis extends React.Component {
     return this.ticks().findByValue(this.values()[handler]);
   }
 
+  moveHandlerTo(tick) {
+    this.moveHandler(HANDLER_ONE, tick);
+  }
+
   moveHandler(handler, tick) {
     let positions = this.state.handlersPosition;
     let values = this.values();
@@ -99,8 +83,24 @@ export default class XAxis extends React.Component {
     })
   }
 
+  move() {
+    let activeTickValue = this.activeTick(HANDLER_ONE).value;
+    let tickNextToActive = this.ticks().findNext(activeTickValue);
+    let maxTickValue = this.limits().max.value;
+
+    if(activeTickValue == maxTickValue) {
+      this.moveHandlerTo(this.limits().min);
+    } else {
+      this.moveHandlerTo(tickNextToActive);
+
+      if(tickNextToActive.value == maxTickValue) {
+        clearInterval(this.interval);
+        this.props.onStop();
+      }
+    }
+  }
+
   handlerDragged(handler, x) {
-    console.log('handler', handler, 'x', x);
     let values = this.values();
     values[handler] = this.ticks().findCloser(x).value;
     this.setState({

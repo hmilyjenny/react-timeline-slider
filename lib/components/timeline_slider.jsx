@@ -81,8 +81,10 @@ export default class TimelineSlider extends React.Component {
     }
   }
 
-  togglePlay() {
-    this.setState({ isPlaying: !this.state.isPlaying });
+  togglePlayStop() {
+    this.setState({
+      isPlaying: !this.state.isPlaying
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -101,7 +103,7 @@ export default class TimelineSlider extends React.Component {
               <PlayStop
                 style={this.styles().playStopStyle}
                 isPlaying={this.state.isPlaying}
-                onPlay={this.togglePlay.bind(this)} />
+                onToggle={this.togglePlayStop.bind(this)} />
             );
           }
         })()}
@@ -113,7 +115,8 @@ export default class TimelineSlider extends React.Component {
           value={this.rawValue()}
           multi={this.props.multi}
           playStop={this.props.playStop}
-          handleStop={this.togglePlay.bind(this)}
+          isPlaying={this.state.isPlaying}
+          onStop={this.togglePlayStop.bind(this)}
           onValueChange={this.onValueChange.bind(this)}/>
       </SVG>
     );

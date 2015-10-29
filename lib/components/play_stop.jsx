@@ -12,28 +12,40 @@ export default class PlayStop extends React.Component {
         <Rect width="50"
           x="0" y="0"
           height="100%"
-          {...this.props.styles.bg} />
+          className="react-timeline-slider__control-bg" />
         <G
           style={{cursor: 'pointer'}}
           onClick={this.handleClick.bind(this)}>
           <Circle
-            {...this.props.styles.circle}/>
+            r="14"
+            cx="24"
+            cy="22"
+            className="react-timeline-slider__control-button" />
             {(()=>{
               if(this.props.isPlaying) {
                 return (
                   <G>
                     <Rect
                       x="19"
-                      {...this.props.styles.pause} />
+                      y="15"
+                      width="3"
+                      height="14"
+                      className="react-timeline-slider__control-pause" />
                     <Rect
                       x="26"
-                      {...this.props.styles.pause} />
+                      y="15"
+                      width="3"
+                      height="14"
+                      className="react-timeline-slider__control-pause" />
                   </G>
                 );
               } else {
                 return (
-                  <Polygon {...this.props.styles.play} transform={"translate(20, 14)"}/>          
-                );                
+                  <Polygon
+                    points="0,0 0,12 12,8"
+                    transform={"translate(20, 16)"}
+                    className="react-timeline-slider__control-play" />
+                )
               }
             })()}
         </G>

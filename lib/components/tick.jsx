@@ -4,7 +4,7 @@ import { G, Circle, Text } from './react_svg';
 export default class Tick extends React.Component {
   textTransform() {
     if(this.props.contextSize == 'compact') {
-      return "translate(-10, 15) rotate(40)";
+      return "translate(8, 16) rotate(-45)";
     } else {
       return "translate(0, 16)";
     }
@@ -12,7 +12,7 @@ export default class Tick extends React.Component {
 
   textAnchor() {
     if(this.props.contextSize == 'compact') {
-      return "start";
+      return "end";
     } else {
       return "middle";
     }
@@ -21,14 +21,16 @@ export default class Tick extends React.Component {
   render() {
     let tick = this.props.tick;
     return (
-      <G className="tick" transform={`translate(${tick.x}, 0)`}>
-        <Circle cx="0" cy="0" {...this.props.styles.tickStyle}/>
-        <text textAnchor={this.textAnchor()}
-          {...this.props.styles.textStyle}
+      <G className="react-timeline-slider__tick"
+        transform={`translate(${tick.x}, 0)`}>
+
+        <Circle cx="0" cy="0" className="react-timeline-slider__tick-point"/>
+        <Text textAnchor={this.textAnchor()}
+          className="react-timeline-slider__tick-text"
           transform={this.textTransform()}>
 
           {tick.value}
-        </text>
+          </Text>
       </G>
     );
   }

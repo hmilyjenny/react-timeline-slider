@@ -10,14 +10,15 @@ export default class Handler extends React.Component {
     super(props);
 
     this.state = {
-      x: null
+      x: null,
+      r: null
     }
   }
 
   handlerDragged() {
     let x = this.state.x;
     if(x != null) {
-      this.setState({ x: null }, () => {
+      this.setState({ x: null, r: null }, () => {
         this.props.dragged(x);
       });
     }
@@ -29,7 +30,7 @@ export default class Handler extends React.Component {
     if(e.x < limits.min.x) x = limits.min.x;
     if(e.x > limits.max.x) x = limits.max.x;
 
-    this.setState({ x: x }, () => {
+    this.setState({ x: x, r: 8 }, () => {
       this.props.onDrag(x);
     });
   }
@@ -42,14 +43,23 @@ export default class Handler extends React.Component {
     }
   }
 
+  get r() {
+    if(this.state.r !== null) {
+      return this.state.r;
+    } else {
+      return 6;
+    }
+  }
+
   render() {
     return (
       <Circle cx={this.x}
         cy="0"
+        r={this.r}
         draggable={true}
         onDrag={this.handlerBeingDragged.bind(this)}
         onDragEnd={this.handlerDragged.bind(this)}
-        {...this.props.style} />
+        className="react-timeline-slider__handler" />
     );
   }
 }

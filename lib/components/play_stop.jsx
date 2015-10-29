@@ -42,8 +42,8 @@ export default class PlayStop extends React.Component {
               } else {
                 return (
                   <Polygon
-                    points="0,0 0,12 12,8"
-                    transform={"translate(20, 16)"}
+                    points="0,0 0,12 12,6"
+                    transform="translate(20, 16)"
                     className="react-timeline-slider__control-play" />
                 )
               }

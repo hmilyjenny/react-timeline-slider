@@ -33,7 +33,7 @@ run a HTTP server
 http-server
 ```
 
-the examples are `example/index.html` and `example/multiple.html`
+the examples are `example/index.html`, `example/multiple.html` and `example/play-stop.html`
 
 ## Styling
 
@@ -73,6 +73,22 @@ $connector-color: 'green';
     stroke: $connector-color;
     stroke-width: 4px;
   }
+
+  &__control-bg {
+    fill: rgba(170, 170, 170, 0.7);
+  }
+
+  &__control-button {
+    fill: rgb(255, 255, 255);
+  }
+
+  &__control-pause {
+    fill: rgb(148, 57, 57);
+  }
+
+  &__control-play {
+    fill: rgb(131, 240, 132);
+  }
 }
 ```
 
@@ -80,6 +96,6 @@ $connector-color: 'green';
 
 - [x] Add multiple handlers option;
 - [x] Refactor of the code
-- [ ] Add play/stop option
+- [x] Add play/stop option
 - [x] ~~Discuss how to customize style~~ Please review if thats a good way
 

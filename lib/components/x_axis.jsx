@@ -87,9 +87,10 @@ export default class XAxis extends React.Component {
     let activeTickValue = this.activeTick(HANDLER_ONE).value;
     let tickNextToActive = this.ticks().findNext(activeTickValue);
     let maxTickValue = this.limits().max.value;
+    let beforeLastHandler;
 
     if(this.props.multi) {
-      let beforeLastHandler = this.ticks().before(this.activeTick(HANDLER_TWO).value);
+      beforeLastHandler = this.ticks().before(this.activeTick(HANDLER_TWO).value);
     }
 
     if(activeTickValue == maxTickValue ||

@@ -2,6 +2,7 @@ import React from 'react';
 import { SVG } from './react_svg';
 import Background from './background';
 import XAxis from './x_axis';
+import PlayStop from './play_stop';
 import _ from 'underscore';
 
 export default class TimelineSlider extends React.Component {
@@ -9,7 +10,8 @@ export default class TimelineSlider extends React.Component {
     super(props);
 
     this.state = {
-      value: null
+      value: null,
+      isPlaying: false
     };
   }
 
@@ -74,6 +76,12 @@ export default class TimelineSlider extends React.Component {
     }
   }
 
+  togglePlayStop() {
+    this.setState({
+      isPlaying: !this.state.isPlaying
+    });
+  }
+
   componentWillReceiveProps(nextProps) {
     if(!_.isEqual(nextProps.range, this.props.range)) {
       this.setState({ value: null });
@@ -85,11 +93,23 @@ export default class TimelineSlider extends React.Component {
       <SVG className="react-timeline-slider"
         width={this.width()} height={this.height()}>
         <Background />
+        {(()=>{
+          if(this.props.playStop) {
+            return (
+              <PlayStop
+                isPlaying={this.state.isPlaying}
+                onToggle={this.togglePlayStop.bind(this)} />
+            );
+          }
+        })()}
         <XAxis contextSize={this.contextSize()}
           width={this.width()}
           range={this.props.range}
           value={this.rawValue()}
           multi={this.props.multi}
+          playStop={this.props.playStop}
+          isPlaying={this.state.isPlaying}
+          onStop={this.togglePlayStop.bind(this)}
           onValueChange={this.onValueChange.bind(this)}/>
       </SVG>
     );
@@ -98,5 +118,6 @@ export default class TimelineSlider extends React.Component {
 
 TimelineSlider.defaultProps = {
   styles: {},
-  multi: false
+  multi: false,
+  playStop: false
 }

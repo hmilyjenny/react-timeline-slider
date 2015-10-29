@@ -4,9 +4,9 @@
   "description": "A Timeline Slider for React",
   "main": "lib/index.js",
   "dependencies": {
+    "classnames": "^2.1.5",
     "d3": "^3.5.6",
-    "underscore": "^1.8.3",
-    "classnames": "^2.1.5"
+    "underscore": "^1.8.3"
   },
   "peerDependencies": {
     "react": "^0.14.0",

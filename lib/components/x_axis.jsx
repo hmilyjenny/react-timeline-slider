@@ -16,8 +16,28 @@ export default class XAxis extends React.Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(this.props.isPlaying != nextProps.isPlaying) {
+      if(nextProps.isPlaying) {
+        this.move();
+        this.interval = setInterval(this.move.bind(this), 1000);
+      } else {
+        clearInterval(this.interval);
+      }
+    }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  playStopSpace() {
+    if(this.props.playStop) return 50;
+    return 0;
+  }
+
   width() {
-    return this.props.width - this.props.margin*4;
+    return this.props.width - this.props.margin*4 - this.playStopSpace();
   }
 
   ticks() {
@@ -46,6 +66,50 @@ export default class XAxis extends React.Component {
     return this.ticks().findByValue(this.values()[handler]);
   }
 
+  moveHandlerTo(tick) {
+    this.moveHandler(HANDLER_ONE, tick);
+  }
+
+  moveHandler(handler, tick) {
+    let positions = this.state.handlersPosition;
+    let values = this.values();
+    positions[handler] = tick.x;
+    values[handler] = tick.value;
+
+    this.setState({
+      handlersPosition: positions
+    }, () => {
+      this.props.onValueChange(values.toArray());
+    })
+  }
+
+  move() {
+    let activeTickValue = this.activeTick(HANDLER_ONE).value;
+    let tickNextToActive = this.ticks().findNext(activeTickValue);
+    let maxTickValue = this.limits().max.value;
+    let beforeLastHandler;
+
+    if(this.props.multi) {
+      beforeLastHandler = this.ticks().before(this.activeTick(HANDLER_TWO).value);
+    }
+
+    if(activeTickValue == maxTickValue ||
+      (this.props.multi && activeTickValue == beforeLastHandler.value)) {
+        this.moveHandlerTo(this.limits().min);
+
+    } else {
+      if(!(this.props.multi && tickNextToActive.value == maxTickValue)) {
+        this.moveHandlerTo(tickNextToActive);
+      }
+
+      if(tickNextToActive.value == maxTickValue ||
+        (this.props.multi && tickNextToActive.value == beforeLastHandler.value)) {
+          clearInterval(this.interval);
+          this.props.onStop();
+      }
+    }
+  }
+
   handlerDragged(handler, x) {
     let values = this.values();
     values[handler] = this.ticks().findCloser(x).value;
@@ -53,7 +117,7 @@ export default class XAxis extends React.Component {
       handlersPosition: []
     }, () => {
       this.props.onValueChange(values.toArray());
-    })
+    });
   }
 
   setHandlerPosition(handler, x) {
@@ -94,7 +158,7 @@ export default class XAxis extends React.Component {
     let margin = this.props.margin;
 
     return (
-      <G className="xaxis" transform={ `translate(${margin*2}, ${margin}) ` }>
+      <G className="xaxis" transform={ `translate(${margin*2+this.playStopSpace()}, ${margin}) ` }>
         <TickCollectionView
           contextSize={this.props.contextSize}
           ticks={this.ticks()}/>

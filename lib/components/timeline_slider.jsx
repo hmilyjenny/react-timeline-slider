@@ -101,7 +101,7 @@ export default class TimelineSlider extends React.Component {
           if(this.props.playStop) {
             return (
               <PlayStop
-                style={this.styles().playStopStyle}
+                styles={this.styles().playStopStyle}
                 isPlaying={this.state.isPlaying}
                 onToggle={this.togglePlayStop.bind(this)} />
             );

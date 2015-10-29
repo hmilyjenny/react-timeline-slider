@@ -40,6 +40,13 @@ class TickCollection {
     })[0];
   }
 
+  before(v) {
+    let ticks = _.filter(this.ticks, (tick) => {
+      return tick.value < v;
+    });
+    return ticks[ticks.length - 1];
+  }
+
   min() {
     return this.ticks.sort((a, b) => a.x - b.x)[0];
   }

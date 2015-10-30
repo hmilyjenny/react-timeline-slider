@@ -24,7 +24,7 @@ export default class Tick extends React.Component {
       <G className="react-timeline-slider__tick"
         transform={`translate(${tick.x}, 0)`}>
 
-        <Circle cx="0" cy="0" className="react-timeline-slider__tick-point"/>
+        <Circle cx="0" cy="0" r="2" className="react-timeline-slider__tick-point"/>
         <Text textAnchor={this.textAnchor()}
           className="react-timeline-slider__tick-text"
           transform={this.textTransform()}>

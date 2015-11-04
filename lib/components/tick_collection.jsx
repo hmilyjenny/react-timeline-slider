@@ -6,7 +6,8 @@ export default class TickCollection extends React.Component {
   render() {
     let ticks = this.props.ticks.map((t, i) => {
       return <Tick tick={t} key={i}
-        contextSize={this.props.contextSize} />;
+        contextSize={this.props.contextSize}
+        onClick={this.props.onClick.bind(this)} />;
     });
 
     return (

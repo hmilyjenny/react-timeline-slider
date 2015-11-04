@@ -137,6 +137,35 @@ export default class XAxis extends React.Component {
     }
   }
 
+  getHandlerDistance(handler, x) {
+    let handlerPosition = this.getHandlerPosition(handler);
+    return Math.abs(handlerPosition - x);
+  }
+
+  findCloserHandler(x) {
+    if(this.getHandlerDistance(HANDLER_ONE, x) > this.getHandlerDistance(HANDLER_TWO, x)) {
+      return HANDLER_TWO;
+    } else {
+      return HANDLER_ONE;
+    }
+  }
+
+  thereIsAHandlerOn(x) {
+    return this.getHandlerDistance(HANDLER_ONE, x) == 0 ||
+           this.getHandlerDistance(HANDLER_TWO, x) == 0;
+  }
+
+  handleTickClick(tick) {
+    if(this.props.multi) {
+      if(!this.thereIsAHandlerOn(tick.x)) {
+        let handler = this.findCloserHandler(tick.x);
+        this.moveHandler(handler, tick);
+      }
+    } else {
+      this.moveHandlerTo(tick);
+    }
+  }
+
   multiHandlerSupport() {
     if(this.props.multi) {
       return (
@@ -161,7 +190,8 @@ export default class XAxis extends React.Component {
       <G className="xaxis" transform={ `translate(${margin*2+this.playStopSpace()}, ${margin}) ` }>
         <TickCollectionView
           contextSize={this.props.contextSize}
-          ticks={this.ticks()}/>
+          ticks={this.ticks()}
+          onClick={this.handleTickClick.bind(this)}/>
         {this.multiHandlerSupport()}
         <Handler ticks={this.ticks()}
           limits={this.limits()}

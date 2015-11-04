@@ -55,7 +55,13 @@ export default class TimelineSlider extends React.Component {
   }
 
   contextSize() {
-    if(this.textSize() > (this.props.width / 2)) {
+    let playStopControlWidth = 0;
+
+    if(this.props.playStop) {
+      playStopControlWidth = 50;
+    }
+
+    if(this.textSize() > ((this.props.width - playStopControlWidth) / 2)) {
       return "compact";
     } else {
       return "large";
@@ -70,7 +76,7 @@ export default class TimelineSlider extends React.Component {
 
   height() {
     if(this.contextSize() == "compact") {
-      return 80;
+      return 65;
     } else {
       return 45;
     }
@@ -97,6 +103,7 @@ export default class TimelineSlider extends React.Component {
           if(this.props.playStop) {
             return (
               <PlayStop
+                contextSize={this.contextSize()}
                 isPlaying={this.state.isPlaying}
                 onToggle={this.togglePlayStop.bind(this)} />
             );

@@ -13,6 +13,7 @@
       load = function() {
         var c = React.createClass({
           onValueChange: function(v) {
+            document.getElementById("value").innerHTML = v;
             console.log(v);
             this.setState({ v: v });
           },

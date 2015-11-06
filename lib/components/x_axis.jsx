@@ -25,6 +25,10 @@ export default class XAxis extends React.Component {
         clearInterval(this.interval);
       }
     }
+
+    if(!_.isEqual(nextProps.multi, this.props.multi)) {
+      this.setState({ handlersPosition: [] });
+    }
   }
 
   componentWillUnmount() {

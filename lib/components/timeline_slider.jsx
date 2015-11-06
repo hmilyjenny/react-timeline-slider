@@ -88,8 +88,14 @@ export default class TimelineSlider extends React.Component {
     });
   }
 
+  propsAreEqual(nextProps, props) {
+    return _.compact(props.map((prop) => {
+      return _.isEqual(nextProps[prop], this.props[prop]);
+    })).length == props.length;
+  }
+
   componentWillReceiveProps(nextProps) {
-    if(!_.isEqual(nextProps.range, this.props.range)) {
+    if(!this.propsAreEqual(nextProps, ['range', 'multi', 'defaultValue'])) {
       this.setState({ value: null });
     }
   }

@@ -121,6 +121,7 @@ export default class TimelineSlider extends React.Component {
           value={this.rawValue()}
           multi={this.props.multi}
           playStop={this.props.playStop}
+          playStopSpeed={this.props.playStopSpeed}
           isPlaying={this.state.isPlaying}
           onStop={this.togglePlayStop.bind(this)}
           onValueChange={this.onValueChange.bind(this)}/>

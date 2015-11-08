@@ -75,16 +75,10 @@ export default class XAxis extends React.Component {
   }
 
   moveHandler(handler, tick) {
-    let positions = this.state.handlersPosition;
     let values = this.values();
-    positions[handler] = tick.x;
     values[handler] = tick.value;
 
-    this.setState({
-      handlersPosition: positions
-    }, () => {
-      this.props.onValueChange(values.toArray());
-    })
+    this.props.onValueChange(values.toArray());
   }
 
   move() {

@@ -59,7 +59,8 @@ export default class Handler extends React.Component {
         draggable={true}
         onDrag={this.handlerBeingDragged.bind(this)}
         onDragEnd={this.handlerDragged.bind(this)}
-        className="react-timeline-slider__handler" />
+        className="react-timeline-slider__handler"
+        style={{cursor: 'pointer'}} />
     );
   }
 }

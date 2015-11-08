@@ -22,7 +22,7 @@ class TickCollection {
   }
 
   findByValue(v) {
-    return this.ticks.find((t) => t.value == v);
+    return _.find(this.ticks, (t) => t.value == v);
   }
 
   findCloser(x) {

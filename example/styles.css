@@ -2,9 +2,6 @@
   fill: rgba(200, 200, 200, 0.4);
   stroke: rgba(220, 220, 220, 0.2);
 }
-.react-timeline-slider__tick {
-  cursor: pointer;
-}
 .react-timeline-slider__tick-point {
   fill: #303030;
   r: 2;
@@ -14,7 +11,6 @@
   font-family: sans-serif;
 }
 .react-timeline-slider__handler {
-  cursor: pointer;
   stroke: #303030;
   fill: #00ff66;
   r: 5;

@@ -23,6 +23,7 @@ export default class Tick extends React.Component {
     return (
       <G className="react-timeline-slider__tick"
         transform={`translate(${tick.x}, 0)`}
+        style={{cursor: 'pointer'}}
         onClick={this.props.onClick.bind(this, tick)}>
 
         <Circle cx="0" cy="0" r="2" className="react-timeline-slider__tick-point"/>

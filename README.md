@@ -1,8 +1,6 @@
 React Timeline
 =============
 
-*Just a draft, not working yet*
-
 A Timeline Slider for React.
 
 ### Usage

@@ -83,9 +83,16 @@ export default class TimelineSlider extends React.Component {
   }
 
   togglePlayStop() {
+    let prevIsPlaying = this.state.isPlaying;
+    let nextIsPlaying = !this.state.isPlaying;
+
     this.setState({
-      isPlaying: !this.state.isPlaying
+      isPlaying: nextIsPlaying
     });
+
+    if(this.props.onPlayChange) {
+      this.props.onPlayChange(prevIsPlaying, nextIsPlaying);
+    }
   }
 
   propsAreEqual(nextProps, props) {

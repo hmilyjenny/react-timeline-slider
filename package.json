@@ -1,23 +1,28 @@
 {
   "name": "react-timeline-slider",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A Timeline Slider for React",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "dependencies": {
-    "classnames": "^2.1.5",
-    "d3": "^3.5.6",
-    "underscore": "^1.8.3"
+    "classnames": "2.1.x",
+    "d3": "3.x.x",
+    "underscore": "1.8.x"
   },
   "peerDependencies": {
-    "react": "^0.14.0",
-    "react-dom": "^0.14.0"
+    "react": "15.x.x",
+    "react-dom": "15.x.x"
   },
   "devDependencies": {
-    "babelify": "^6.3.0",
-    "browserify": "^11.2.0",
-    "browserify-shim": "^3.8.10",
-    "gulp": "^3.9.0",
-    "vinyl-source-stream": "^1.1.0"
+    "babel-preset-es2015": "6.x.x",
+    "babel-preset-react": "6.x.x",
+    "babelify": "6.x.x",
+    "browserify": "11.x.x",
+    "browserify-shim": "3.x.x",
+    "gulp": "3.9.x",
+    "gulp-babel": "6.x.x",
+    "gulp-sourcemaps": "^2.0.0-alpha",
+    "vinyl-buffer": "1.x.x",
+    "vinyl-source-stream": "1.x.x"
   },
   "browserify-shim": {
     "classnames": "global:classNames",
@@ -30,14 +35,16 @@
       "browserify-shim"
     ]
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/ecostage/react-timeline-slider.git"
   },
-  "author": "",
+  "scripts": {
+    "build": "gulp build",
+    "watch": "gulp watch",
+    "publish": "gulp publish"
+  },
+  "author": "Ecostage",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ecostage/react-timeline-slider/issues"

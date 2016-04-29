@@ -1,13 +1,10 @@
 var gulp = require('gulp');
 var babel = require('gulp-babel');
 var browserify = require('browserify');
-var buffer = require('vinyl-buffer');
-var concat = require('gulp-concat');
 var filter = require('gulp-filter');
 var rename = require('gulp-rename');
 var source = require('vinyl-source-stream');
 var sourcemaps = require('gulp-sourcemaps');
-var uglify = require('gulp-uglify');
 
 var paths = {
   javascripts: ['lib/**/*.jsx', 'lib/**/*.js'],

@@ -5,7 +5,7 @@
   "main": "dist-npm/index.js",
   "dependencies": {
     "classnames": "2.1.x",
-    "d3": "3.x.x",
+    "d3": "3.5.x",
     "underscore": "1.8.x"
   },
   "peerDependencies": {
@@ -13,36 +13,34 @@
     "react-dom": "15.x.x"
   },
   "devDependencies": {
+    "babel-plugin-add-module-exports": "^0.1.4",
+    "babel-plugin-transform-es2015-modules-amd": "6.x.x",
     "babel-preset-es2015": "6.x.x",
     "babel-preset-react": "6.x.x",
-    "babelify": "6.x.x",
+    "babelify": "7.x.x",
     "browserify": "11.x.x",
-    "browserify-shim": "3.x.x",
     "gulp": "3.9.x",
     "gulp-babel": "6.x.x",
+    "gulp-concat": "2.6.x",
+    "gulp-filter": "^4.0.0",
+    "gulp-rename": "1.2.x",
     "gulp-sourcemaps": "^2.0.0-alpha",
-    "vinyl-buffer": "1.x.x",
+    "gulp-uglify": "1.5.x",
+    "http-server": "0.9.x",
+    "react": "15.x.x",
+    "react-dom": "15.x.x",
     "vinyl-source-stream": "1.x.x"
-  },
-  "browserify-shim": {
-    "classnames": "global:classNames",
-    "react": "global:React",
-    "react-dom": "global:ReactDOM"
-  },
-  "browserify": {
-    "transform": [
-      "babelify",
-      "browserify-shim"
-    ]
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/ecostage/react-timeline-slider.git"
   },
   "scripts": {
+    "start": "npm run build && (npm run watch & http-server)",
     "build": "gulp build",
     "watch": "gulp watch",
-    "publish": "gulp publish"
+    "publish": "gulp publish",
+    "server": "http-server -c-1"
   },
   "author": "Ecostage",
   "license": "ISC",

@@ -100,4 +100,5 @@ var PlayStop = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = PlayStop;
+module.exports = exports['default'];
 //# sourceMappingURL=play_stop.js.map

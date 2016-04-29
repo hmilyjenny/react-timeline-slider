@@ -265,4 +265,5 @@ exports.default = XAxis;
 XAxis.defaultProps = {
   margin: 18
 };
+module.exports = exports['default'];
 //# sourceMappingURL=x_axis.js.map

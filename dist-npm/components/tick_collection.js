@@ -56,4 +56,5 @@ var TickCollection = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = TickCollection;
+module.exports = exports['default'];
 //# sourceMappingURL=tick_collection.js.map

@@ -44,4 +44,5 @@ var LineBetweenHandlers = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = LineBetweenHandlers;
+module.exports = exports['default'];
 //# sourceMappingURL=line_between_handlers.js.map

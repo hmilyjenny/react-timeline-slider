@@ -43,4 +43,5 @@ var Background = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Background;
+module.exports = exports['default'];
 //# sourceMappingURL=background.js.map

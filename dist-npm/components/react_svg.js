@@ -17,7 +17,9 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-require('d3');
+var _d = require('d3');
+
+var _d2 = _interopRequireDefault(_d);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -41,13 +43,13 @@ var SVGComponent = function (_React$Component) {
     value: function setupDrag() {
       var _this2 = this;
 
-      var drag = d3.behavior.drag();
+      var drag = _d2.default.behavior.drag();
       var element = _reactDom2.default.findDOMNode(this.refs.component);
-      var d3Element = d3.select(element);
+      var d3Element = _d2.default.select(element);
 
       if (this.props.onDrag) {
         drag.on("drag", function (e) {
-          _this2.props.onDrag(d3.event);
+          _this2.props.onDrag(_d2.default.event);
         });
       }
 
@@ -70,7 +72,7 @@ var SVGComponent = function (_React$Component) {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
       var element = _reactDom2.default.findDOMNode(this.refs.component);
-      var d3Element = d3.select(element);
+      var d3Element = _d2.default.select(element);
       d3Element.on('.drag', null);
     }
   }, {

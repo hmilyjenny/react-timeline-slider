@@ -52,4 +52,5 @@ var ReactTimelineSlider = function (_React$Component) {
 
 exports.default = ReactTimelineSlider;
 ;
+module.exports = exports['default'];
 //# sourceMappingURL=react_timeline_slider.js.map

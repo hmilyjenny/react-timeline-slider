@@ -200,4 +200,5 @@ TimelineSlider.defaultProps = {
   multi: false,
   playStop: false
 };
+module.exports = exports['default'];
 //# sourceMappingURL=timeline_slider.js.map

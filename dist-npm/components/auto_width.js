@@ -71,6 +71,5 @@ var AutoWidth = function AutoWidth(ComposedComponent) {
 };
 
 exports.default = AutoWidth;
-
-global.AutoWidth = AutoWidth;
+module.exports = exports['default'];
 //# sourceMappingURL=auto_width.js.map

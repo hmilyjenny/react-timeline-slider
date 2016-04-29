@@ -15,6 +15,5 @@ var _auto_width2 = _interopRequireDefault(_auto_width);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = (0, _auto_width2.default)(_timeline_slider2.default);
-
-global.ReactTimelineSlider = (0, _auto_width2.default)(_timeline_slider2.default);
+module.exports = exports['default'];
 //# sourceMappingURL=index.js.map

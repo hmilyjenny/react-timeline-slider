@@ -1,1 +1,0 @@
-{"version":3,"sources":["index.js"],"names":[],"mappings":";;;;;;AAAA;;;;AACA;;;;;;kBAEe,oD","file":"index.js","sourcesContent":["import TimelineSlider from \"./components/timeline_slider\";\nimport AutoWidth from \"./components/auto_width\";\n\nexport default AutoWidth(TimelineSlider);\n"]}

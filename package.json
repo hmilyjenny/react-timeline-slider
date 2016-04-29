@@ -37,7 +37,7 @@
     "start": "npm run build && (npm run watch & http-server)",
     "build": "gulp build",
     "watch": "gulp watch",
-    "publish": "gulp publish",
+    "prepublish": "gulp publish",
     "server": "http-server -c-1"
   },
   "author": "Ecostage",

@@ -1,9 +1,10 @@
-define(["module", "exports", "./components/timeline_slider", "./components/auto_width"], function (module, exports, _timeline_slider, _auto_width) {
+define(["exports", "./components/timeline_slider", "./components/auto_width"], function (exports, _timeline_slider, _auto_width) {
   "use strict";
 
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
+  exports.AutoWidth = undefined;
 
   var _timeline_slider2 = _interopRequireDefault(_timeline_slider);
 
@@ -16,6 +17,6 @@ define(["module", "exports", "./components/timeline_slider", "./components/auto_
   }
 
   exports.default = (0, _auto_width2.default)(_timeline_slider2.default);
-  module.exports = exports['default'];
+  exports.AutoWidth = _auto_width2.default;
 });
 //# sourceMappingURL=main.js.map
